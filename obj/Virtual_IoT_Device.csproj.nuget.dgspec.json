@@ -39,6 +39,16 @@
       "frameworks": {
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
+          "dependencies": {
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.2, )"
+            },
+            "WebSocket4Net": {
+              "target": "Package",
+              "version": "[0.15.2, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
