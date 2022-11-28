@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using Tools;
+
 namespace Virtual_IoT_Device
 {
     /// <summary>
@@ -20,9 +22,12 @@ namespace Virtual_IoT_Device
     /// </summary>
     public partial class MainWindow : Window
     {
+        IoT_SinricPro iot;
+
         public MainWindow()
         {
             InitializeComponent();
+            iot=new IoT_SinricPro();
         }
     }
 }
