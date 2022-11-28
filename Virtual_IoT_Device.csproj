@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Image\door closed.jpg" />
+    <None Remove="Image\door_close.jpg" />
     <None Remove="Image\door_open.jpg" />
     <None Remove="Image\Smart_Bulb.jpg" />
     <None Remove="Image\Smart_Bulb.png" />
@@ -21,8 +21,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Image\door closed.jpg" />
     <Resource Include="Image\door_open.jpg" />
+    <Resource Include="Image\door_close.jpg" />
     <Resource Include="Image\Smart_Bulb.jpg" />
     <Resource Include="Image\Smart_Bulb.png" />
     <Resource Include="Image\Wall_Thermometer.png" />

@@ -5,7 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Virtual_IoT_Device"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="600" Width="800"
+        Background="Black"
+        Foreground="Black"
+        >
+
     <Grid>
 
         <Grid.RowDefinitions>
@@ -66,92 +70,225 @@
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
 
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
 
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
 
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="16"></ColumnDefinition>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
 
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <!--_____<Output Power Limits>_____________________________________________________________________________-->
-        <Image  x:Name="img_door"
-                Source="Image/door closed.jpg"  Stretch="Fill"        
-                Grid.Row="5" Grid.Column="0"
-                Grid.ColumnSpan="10" Grid.RowSpan="40"
-                ></Image>
-        <!--_____<Output Power Limits>_____________________________________________________________________________-->
-        <Label  x:Name="lbl_application_mode" 
-                Content="2. Application Mode"       
-                Grid.Row="13" Grid.Column="1"
+
+        <!--_____<Heading>_____________________________________________________________________________-->
+        <Label  x:Name="lbl_heading" 
+                Content="Virtual IoT Hardware"       
+                Grid.Row="2" Grid.Column="15"
+                Grid.ColumnSpan="20" Grid.RowSpan="4" 
+                FontSize="24" FontWeight="Bold" Foreground="White"
+                HorizontalContentAlignment="Center" 
+                VerticalAlignment="Top" Margin="0,1,0,0"                           
+        />
+        <!--_____<Door>_____________________________________________________________________________-->
+        <Label  x:Name="lbl_door" 
+                Content="DOOR"       
+                Grid.Row="7" Grid.Column="5"
                 Grid.ColumnSpan="12" Grid.RowSpan="3" 
+                FontSize="18" FontWeight="Bold"
+                HorizontalContentAlignment="Left"  Foreground='White'
+                VerticalAlignment="Center"                           
+        />
+        <Image  x:Name="img_door"
+                Source="Image/door_close.jpg"  Stretch="Fill"        
+                Grid.Row="10" Grid.Column="3"
+                Grid.ColumnSpan="10" Grid.RowSpan="25" 
+                ></Image>
+
+        <Button x:Name="btn_door_open" Content="OPEN" 
+                    Grid.Row="37" Grid.Column="4"
+                    Grid.ColumnSpan="8" Grid.RowSpan="3"   
+                    Style="{StaticResource Theme_Button}"
+                    Click="btn_door_open_Click"
+        ></Button>
+
+        <Button x:Name="btn_door_close" Content="CLOSE" 
+                    Grid.Row="42" Grid.Column="4"
+                    Grid.ColumnSpan="8" Grid.RowSpan="3"   
+                    Style="{StaticResource Theme_Button}"
+                    Click="btn_door_close_Click"
+        ></Button>
+        <!--_____<Smart Light>_____________________________________________________________________________-->
+        <Label  x:Name="lbl_smart_light" 
+                Content="SMART BULB"       
+                Grid.Row="4" Grid.Column="20"
+                Grid.ColumnSpan="12" Grid.RowSpan="10" 
+                FontSize="18" FontWeight="Bold"
+                HorizontalContentAlignment="Left"  Foreground="White"
+                VerticalAlignment="Center"                           
+        />
+
+        <Rectangle x:Name="smart_bulb_bg"          
+            Width="200" Height="200"
+            Grid.Row="10" Grid.Column="19"
+                Grid.ColumnSpan="10" Grid.RowSpan="10"            
+                Fill="red"            
+        />
+
+        <Image  x:Name="img_smart_bulb"
+                Source="Image/Smart_Bulb.png"  Stretch="Fill"        
+                Grid.Row="10" Grid.Column="19"
+                Grid.ColumnSpan="10" Grid.RowSpan="25"
+                ></Image>
+
+        <Button x:Name="btn_smart_bulb_on" Content="ON" 
+                    Grid.Row="37" Grid.Column="18"
+                    Grid.ColumnSpan="5" Grid.RowSpan="3"   
+                    Style="{StaticResource Theme_Button}"
+                    Click="btn_smart_bulb_on_Click"
+        ></Button>
+
+        <Button x:Name="btn_smart_bulb_off" Content="OFF" 
+                    Grid.Row="37" Grid.Column="24"
+                    Grid.ColumnSpan="5" Grid.RowSpan="3"   
+                    Style="{StaticResource Theme_Button}"
+                    Click="btn_smart_bulb_off_Click"
+        ></Button>
+
+        <Label  
+                Content="R="       
+                Grid.Row="40" Grid.Column="19"
+                Grid.ColumnSpan="2" Grid.RowSpan="4" 
+                FontSize="18" FontWeight="Bold"
+                HorizontalContentAlignment="Left" 
+                VerticalAlignment="Top"  
+                Foreground="red" Margin="0,6,0,0"
+        />
+
+        <TextBox x:Name="txt_value_R"  Text=""
+                FontFamily="Calibri" FontWeight="Normal" FontSize="20"
+                Background="White" Foreground="Black"       
+                Grid.Row="41" Grid.RowSpan="2" 
+                Grid.Column="21" Grid.ColumnSpan="5"   
+                KeyDown="txt_value_R_KeyDown"
+        />
+        <Label  
+                Content="G="       
+                Grid.Row="43" Grid.Column="19"
+                Grid.ColumnSpan="2" Grid.RowSpan="4" 
+                FontSize="18" FontWeight="Bold"
+                HorizontalContentAlignment="Left" 
+                VerticalAlignment="Top"  
+                Foreground="Green" Margin="0,6,0,0"
+        />
+
+        <TextBox x:Name="txt_value_G"  Text=""
+                FontFamily="Calibri" FontWeight="Normal" FontSize="20"
+                Background="White" Foreground="Black"        
+                Grid.Row="44" Grid.RowSpan="2" 
+                Grid.Column="21" Grid.ColumnSpan="5" 
+                 KeyDown="txt_value_G_KeyDown"
+        />
+        <Label  
+                Content="B="       
+                Grid.Row="46" Grid.Column="19"
+                Grid.ColumnSpan="2" Grid.RowSpan="4" 
+                FontSize="18" FontWeight="Bold"
+                HorizontalContentAlignment="Left" 
+                VerticalAlignment="Top"  
+                Foreground="Blue" Margin="0,6,0,0"
+        />
+        <TextBox x:Name="txt_value_B"  Text=""
+                FontFamily="Calibri" FontWeight="Normal" FontSize="20"
+                Background="White" Foreground="Black"      
+                Grid.Row="47" Grid.RowSpan="2" 
+                Grid.Column="21" Grid.ColumnSpan="5"   
+                KeyDown="txt_value_B_KeyDown"
+        />
+        <!--_____<Wall Temperature>_____________________________________________________________________________-->
+        <Label  x:Name="lbl_wall_temp" 
+                Content="Wall Thermometer"       
+                Grid.Row="4" Grid.Column="34"
+                Grid.ColumnSpan="20" Grid.RowSpan="10"  Foreground="White"
                 FontSize="18" FontWeight="Bold"
                 HorizontalContentAlignment="Left" 
                 VerticalAlignment="Center"                           
         />
-        <!--_____<Output Power Limits>_____________________________________________________________________________-->
-        <TextBox x:Name="txt_temp_limit"  
-                FontFamily="Calibri" FontWeight="Bold" FontSize="24"
-                Background="Wheat" Foreground="Black"       
-                Grid.Row="21" Grid.RowSpan="2" 
-                Grid.Column="26" Grid.ColumnSpan="5" 
-                KeyDown="txt_temp_limit_KeyDown"
+        <Image  x:Name="img_wall_temp"
+                Source="Image/Wall_Thermometer.png"  Stretch="Fill"        
+                Grid.Row="10" Grid.Column="36"
+                Grid.ColumnSpan="6" Grid.RowSpan="30"
+                ></Image>
+
+        <Canvas x:Name="temp_progress"          
+            Grid.Row="12" Grid.Column="38"
+            Grid.ColumnSpan="2" Grid.RowSpan="25"   
+            Background="Black" Margin="8,6,8,6"               
         />
 
-        <!--_____Back Button__________________________________________________________________________________-->
-        <Button x:Name="btn_back" Content="BACK" 
-                    Grid.Row="44" Grid.Column="35"
-                    Grid.ColumnSpan="6" Grid.RowSpan="3"
-                    Click="btn_back_Click" 
-                    Style="{StaticResource Theme_Button}"
-        ></Button>
+        <TextBox x:Name="txt_wall_temp"  Text=""
+                FontFamily="Calibri" FontWeight="Normal" FontSize="20"
+                Background="White" Foreground="Black"      
+                Grid.Row="44" Grid.RowSpan="2" 
+                Grid.Column="37" Grid.ColumnSpan="5"   
+                KeyDown="txt_wall_temp_KeyDown"
+        />
+        <Label  
+                Content="Temperature"       
+                Grid.Row="40" Grid.Column="36"
+                Grid.ColumnSpan="8" Grid.RowSpan="4" 
+                FontSize="18" FontWeight="Bold"
+                HorizontalContentAlignment="Left" 
+                VerticalAlignment="Top"  
+                Foreground="White" Margin="0,6,0,0"
+        />
+        <!--_____<Smart Light>_____________________________________________________________________________-->
+
 
     </Grid>
 </Window>
