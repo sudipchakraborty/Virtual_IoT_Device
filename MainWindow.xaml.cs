@@ -27,7 +27,7 @@ namespace Virtual_IoT_Device
         public MainWindow()
         {
             InitializeComponent();
-            iot=new IoT_SinricPro();
+           // iot=new IoT_SinricPro();
         }
     }
 }
