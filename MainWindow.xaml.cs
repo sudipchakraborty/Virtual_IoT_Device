@@ -12,8 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
-using Tools;
+using Virtual_IoT_Device.IoT_Sinric_Pro;
 
 namespace Virtual_IoT_Device
 {

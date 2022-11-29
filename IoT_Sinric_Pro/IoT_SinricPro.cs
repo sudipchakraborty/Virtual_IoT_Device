@@ -9,18 +9,12 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 
-using ConsoleExampleCore;
-
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-
-using SinricLibrary;
-//using SinricLibrary.Devices;
 using SuperSocket.ClientEngine;
 using WebSocket4Net;
 
-
-namespace Tools
+namespace Virtual_IoT_Device.IoT_Sinric_Pro
 {
     public class IoT_SinricPro
     {
@@ -41,17 +35,17 @@ namespace Tools
 
         private ConcurrentQueue<SinricMessage2> IncomingMessages { get; } = new ConcurrentQueue<SinricMessage2>();
         private ConcurrentQueue<SinricMessage2> OutgoingMessages { get; } = new ConcurrentQueue<SinricMessage2>();
-   //     private Dictionary<string, SinricDeviceBase> Devices { get; set; } = new Dictionary<string, SinricDeviceBase>(StringComparer.OrdinalIgnoreCase);
-   //     public SinricSmartLock SmartLocks(string name) => (SinricSmartLock)Devices[name];
-   //     public SinricContactSensor ContactSensors(string name) => (SinricContactSensor)Devices[name];
+        //     private Dictionary<string, SinricDeviceBase> Devices { get; set; } = new Dictionary<string, SinricDeviceBase>(StringComparer.OrdinalIgnoreCase);
+        //     public SinricSmartLock SmartLocks(string name) => (SinricSmartLock)Devices[name];
+        //     public SinricContactSensor ContactSensors(string name) => (SinricContactSensor)Devices[name];
 
         public IoT_SinricPro()
         {
-            SecretKey="8f41d53e-0173-48b9-bfc0-fc254e730d42-73c800c7-b08d-4938-b4d1-988585a20aa1";
+            SecretKey = "8f41d53e-0173-48b9-bfc0-fc254e730d42-73c800c7-b08d-4938-b4d1-988585a20aa1";
             var headers3 = new List<KeyValuePair<string, string>>();
 
             KeyValuePair<string, string> app_key = new KeyValuePair<string, string>("appkey", "4605c221-5d30-494d-836f-42db372373de");
-          //  KeyValuePair<string, string> dev_ids = new KeyValuePair<string, string>("deviceids", "6369fcc9333d12dd2ae9b09c;6369fc7eb8a7fefbd63538a5;6369fbc5b8a7fefbd63535fc");
+            //  KeyValuePair<string, string> dev_ids = new KeyValuePair<string, string>("deviceids", "6369fcc9333d12dd2ae9b09c;6369fc7eb8a7fefbd63538a5;6369fbc5b8a7fefbd63535fc");
 
             KeyValuePair<string, string> dev_ids = new KeyValuePair<string, string>("deviceids", "6369fcc9333d12dd2ae9b09c");
 
@@ -79,7 +73,7 @@ namespace Tools
 
         public void MainLoopThread2()
         {
-            Running=true;
+            Running = true;
             while (Running)
             {
                 // handle connection state changes if needed
@@ -93,7 +87,7 @@ namespace Tools
 
                     case WebSocket4Net.WebSocketState.Open:
                         // check devices for new outgoing messages
-                       // SignAndQueueOutgoingMessages();
+                        // SignAndQueueOutgoingMessages();
 
                         // send any outgoing queued messages
                         while (OutgoingMessages.TryDequeue(out var message))
@@ -127,15 +121,15 @@ namespace Tools
         /// </summary>
         public void SignAndQueueOutgoingMessages()
         {
-          //  foreach (var device in Devices.Values)
-           // {
-                //// take messages off the device queues
-                //while (device.OutgoingMessages.TryDequeue(out var message))
-                //{
-                //    // sign them, and add to the outgoing queue for processing
-                //    AddMessageToQueue(message);
-                //}
-           // }
+            //  foreach (var device in Devices.Values)
+            // {
+            //// take messages off the device queues
+            //while (device.OutgoingMessages.TryDequeue(out var message))
+            //{
+            //    // sign them, and add to the outgoing queue for processing
+            //    AddMessageToQueue(message);
+            //}
+            // }
         }
 
         /// <summary>
@@ -164,9 +158,9 @@ namespace Tools
             {
                 var message = JsonConvert.DeserializeObject<SinricMessage2>(e.Message);
 
-           //     if (!HmacSignature2.ValidateMessageSignature(message, SecretKey))
-           //         throw new Exception(
-            //            "Computed signature for the payload does not match the signature supplied in the message. Message may have been tampered with.");
+                //     if (!HmacSignature2.ValidateMessageSignature(message, SecretKey))
+                //         throw new Exception(
+                //            "Computed signature for the payload does not match the signature supplied in the message. Message may have been tampered with.");
 
                 // add to the incoming message queue. caller will retrieve the messages on their own thread
                 IncomingMessages.Enqueue(message);
@@ -189,43 +183,43 @@ namespace Tools
 
 
 
-               //     var device = Devices.Values.FirstOrDefault(d => d.DeviceId == message.Payload.DeviceId);
+                    //     var device = Devices.Values.FirstOrDefault(d => d.DeviceId == message.Payload.DeviceId);
 
-               //     if (device == null)
-               //         Debug.Print("Received message for unrecognized device:\n" + message.Payload.DeviceId);
-               //     else
-              //      {
-                        // pass in a pre-generated reply, default to fail
-                        //     var reply = CreateReplyMessage(message, SinricPayload.Result.Fail);
+                    //     if (device == null)
+                    //         Debug.Print("Received message for unrecognized device:\n" + message.Payload.DeviceId);
+                    //     else
+                    //      {
+                    // pass in a pre-generated reply, default to fail
+                    //     var reply = CreateReplyMessage(message, SinricPayload.Result.Fail);
 
-                        /////////////////////////////////////////////
-                        var reply2 = new SinricMessage2();
-                        reply2.TimestampUtc = DateTime.UtcNow;
-                        reply2.Payload.CreatedAtUtc = DateTime.UtcNow;
+                    /////////////////////////////////////////////
+                    var reply2 = new SinricMessage2();
+                    reply2.TimestampUtc = DateTime.UtcNow;
+                    reply2.Payload.CreatedAtUtc = DateTime.UtcNow;
 
-                        reply2.Payload.Type = SinricPayload.MessageType.Response;
-                        reply2.Payload.Message = SinricPayload.Messages.Ok;
-                        reply2.Payload.DeviceId = message.Payload.DeviceId;
-                        reply2.Payload.ReplyToken = message.Payload.ReplyToken;
-                        reply2.Payload.Action = message.Payload.Action;
-                        reply2.Payload.Success = false;
-                        ////////////////////////////////////////////////
-                     
-                        var id = message.Payload.DeviceId;
-                        var v = message.Payload.Action;
-                        var newState = message.Payload.GetValue<string>(SinricValue.State);
-                     
-                        reply2.Payload.SetState(newState);
-                        reply2.Payload.Success = true;
+                    reply2.Payload.Type = SinricPayload.MessageType.Response;
+                    reply2.Payload.Message = SinricPayload.Messages.Ok;
+                    reply2.Payload.DeviceId = message.Payload.DeviceId;
+                    reply2.Payload.ReplyToken = message.Payload.ReplyToken;
+                    reply2.Payload.Action = message.Payload.Action;
+                    reply2.Payload.Success = false;
+                    ////////////////////////////////////////////////
 
-                        temp=message;
+                    var id = message.Payload.DeviceId;
+                    var v = message.Payload.Action;
+                    var newState = message.Payload.GetValue<string>(SinricValue.State);
 
-                        // client will take an action and update the reply
-                        //    device.MessageReceived(message, reply2);
+                    reply2.Payload.SetState(newState);
+                    reply2.Payload.Success = true;
+
+                    temp = message;
+
+                    // client will take an action and update the reply
+                    //    device.MessageReceived(message, reply2);
 
                     // send the reply to the server
                     AddMessageToQueue2(reply2);
-                   // }
+                    // }
                 }
                 catch (Exception ex)
                 {
@@ -239,7 +233,7 @@ namespace Tools
         public void send_to_server(string device_id, string state)
         {
             var reply = new SinricMessage2();
- 
+
             reply.TimestampUtc = DateTime.UtcNow;
             reply.Payload.CreatedAtUtc = DateTime.UtcNow;
             reply.Payload.Message = "Light is ON";// SinricPayload.Messages.
@@ -251,12 +245,12 @@ namespace Tools
 
             //   reply.Payload.CreatedAt = 0;
             reply.Payload.DeviceId = device_id;
-            reply.Payload.ReplyToken =Utility.MessageID();// "edf31f4e-4027-4f28-9b61-1a597f986ceb";// message.Payload.ReplyToken;
+            reply.Payload.ReplyToken = Util_IoT.MessageID();// "edf31f4e-4027-4f28-9b61-1a597f986ceb";// message.Payload.ReplyToken;
             reply.Payload.Type = SinricPayload.MessageType.Event;
             reply.Payload.SetValue("state", state);
             ////////////////////////////////////////////////
             send_OK(reply);
-           
+
         }
 
         /// <summary>
@@ -269,14 +263,14 @@ namespace Tools
 
             pkt.TimestampUtc = DateTime.UtcNow;
             pkt.Payload.CreatedAtUtc = DateTime.UtcNow;
-            pkt.Payload.Message ="";
+            pkt.Payload.Message = "";
             pkt.Payload.Success = true;
 
             pkt.Payload.Action = "";
             pkt.Payload.SetCause("type", "PHYSICAL_INTERACTION");// = SinricCause.CauseType.GetType("type");        // = SinricCause.PhysicalInteraction.ToString();
 
             pkt.Payload.DeviceId = "";
-            pkt.Payload.ReplyToken = Utility.MessageID(); 
+            pkt.Payload.ReplyToken = Util_IoT.MessageID();
             pkt.Payload.Type = "response";//  SinricPayload.MessageType.Event; //"event", "response", "request";
             pkt.Payload.SetValue("brightness", 5000);
 
@@ -292,7 +286,7 @@ namespace Tools
         /// <param name="type"></param>
         /// <param name="val"></param>
         /// <returns> Return packet object</returns>
-        public SinricMessage2 Get_Packet(string device_id,string action,string type, object val)      
+        public SinricMessage2 Get_Packet(string device_id, string action, string type, object val)
         {
             var reply = new SinricMessage2();
 
@@ -300,16 +294,16 @@ namespace Tools
             reply.Payload.CreatedAtUtc = DateTime.UtcNow;
             reply.Payload.Success = true;
             reply.Payload.SetCause("type", "PHYSICAL_INTERACTION");
-            reply.Payload.ReplyToken = Utility.MessageID();
+            reply.Payload.ReplyToken = Util_IoT.MessageID();
             reply.Payload.Type = "response";
-            reply.Payload.Message = "OK"; 
-            
+            reply.Payload.Message = "OK";
+
             reply.Payload.DeviceId = device_id;
             reply.Payload.Action = action;
             reply.Payload.SetValue(type, val);
-           
-            return reply;           
-    }
+
+            return reply;
+        }
 
         /// <summary>
         /// Continous Update to IoT server 
@@ -327,7 +321,7 @@ namespace Tools
             reply.Payload.CreatedAtUtc = DateTime.UtcNow;
             reply.Payload.Success = true;
             reply.Payload.SetCause("type", "PERIODIC_POLL");
-            reply.Payload.ReplyToken = Utility.MessageID();
+            reply.Payload.ReplyToken = Util_IoT.MessageID();
             reply.Payload.Type = "event";
             reply.Payload.Message = "OK";
 
@@ -337,7 +331,7 @@ namespace Tools
 
             send_OK(reply);
         }
-       
+
         public void Smart_Bulb_Colour(string device_id, string action, string type, object val)
         {
             var reply = temp;
@@ -346,14 +340,14 @@ namespace Tools
             reply.Payload.CreatedAtUtc = DateTime.UtcNow;
             reply.Payload.Success = true;
             reply.Payload.SetCause("type", "PHYSICAL_INTERACTION");
-            reply.Payload.ReplyToken = Utility.MessageID();
+            reply.Payload.ReplyToken = Util_IoT.MessageID();
             reply.Payload.Type = "response";
             reply.Payload.Message = "OK";
 
             string s = reply.Payload.Value.ToString();
             reply.Payload.DeviceId = device_id;
-      //      reply.Payload.Action = action;
-      //      reply.Payload.SetValue(type, val);
+            //      reply.Payload.Action = action;
+            //      reply.Payload.SetValue(type, val);
 
             send_OK(reply);
         }
@@ -414,11 +408,49 @@ namespace Tools
         {
             Debug.Print("Websocket connection error:\n" + e.Exception + "\n");
 
-         //   if (WebSocket.State == WebSocketState.Open)
-             //   WebSocket.Close();
+            //   if (WebSocket.State == WebSocketState.Open)
+            //   WebSocket.Close();
         }
 
     }// class: myIoT
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }// ns
 
@@ -440,7 +472,7 @@ namespace Tools
 
 
 
-namespace ConsoleExampleCore
+namespace Virtual_IoT_Device.IoT_Sinric_Pro
 {
 
 
@@ -466,7 +498,7 @@ namespace ConsoleExampleCore
                 // todo validate timestamp of message, must be within X seconds of local clock, and must be > than the last message time received to protect against replay attacks
 
                 // compute a local signature from the raw payload using our secret key:
-                var signature = HmacSignature.Signature(payloadString, secretKey);
+                var signature = Signature(payloadString, secretKey);
 
                 // compare the locally computed signature with the one supplied in the message:
                 return signature == message.Signature.Hmac;
@@ -705,79 +737,9 @@ namespace ConsoleExampleCore
 
 
 
-namespace SinricLibrary
+namespace Virtual_IoT_Device.IoT_Sinric_Pro
 {
-    public static class Utility
-    {
-        // https://stackoverflow.com/questions/11743160/how-do-i-encode-and-decode-a-base64-string
-        public static string Base64Encode(this string plainText)
-        {
-            var plainTextBytes = Encoding.UTF8.GetBytes(plainText);
-            return System.Convert.ToBase64String(plainTextBytes);
-        }
-
-        public static string Base64Decode(this string base64EncodedData)
-        {
-            var base64EncodedBytes = Convert.FromBase64String(base64EncodedData);
-            return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
-        }
-
-        public static string aDescriptionAttr<T>(this T source)
-        {
-            if (source is Type sourceType)
-            {
-                // attribute for a class, struct or enum
-                var attributes = (DescriptionAttribute[])sourceType.GetCustomAttributes(typeof(DescriptionAttribute), false);
-
-                if (attributes.Length > 0)
-                    return attributes[0].Description;
-            }
-            else
-            {
-                // attribute for a member field
-                var fieldInfo = source.GetType().GetField(source.ToString());
-                var attributes = (DescriptionAttribute[])fieldInfo.GetCustomAttributes(typeof(DescriptionAttribute), false);
-
-                if (attributes.Length > 0)
-                    return attributes[0].Description;
-            }
-
-            return source.ToString();
-        }
-
-        public static string MessageID()
-        {
-            string _id = "";
-            for (byte i = 0; i < 16; i++)
-            {
-                Random random = new Random();
-                byte rnd = (byte)random.Next(1, 255);
-
-                if (i == 4) _id += "-";
-                if (i == 6) { _id += "-"; rnd = (byte)(0x40 | (0x0F & rnd)); } // 0100xxxx to set version 4
-                if (i == 8) { _id += "-"; rnd = (byte)(0x80 | (0x3F & rnd)); } // 10xxxxxx to set reserved bits
-                if (i == 10) _id += "-";
-                byte high_nibble = (byte)(rnd >> 4);
-                byte low_nibble = (byte)(rnd & 0x0f);
-                _id += "0123456789abcdef"[high_nibble];
-                _id += "0123456789abcdef"[low_nibble];
-            }
-            return _id;
-        }
-
-        public static DateTime ConvertFromUnixTimestamp(uint timestamp)
-        {
-            DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-            return origin.AddSeconds(timestamp);
-        }
-
-        public static uint ConvertToUnixTimestamp(DateTime date)
-        {
-            DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-            TimeSpan diff = date.ToUniversalTime() - origin;
-            return (uint)(Math.Floor(diff.TotalSeconds));
-        }
-    }
+    
 }
 
 

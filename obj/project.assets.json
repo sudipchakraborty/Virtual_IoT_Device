@@ -3695,19 +3695,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Dr. S Chakraborty\\.nuget\\packages\\": {}
+    "C:\\Users\\Sudip\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Dr. S Chakraborty\\Desktop\\Virtual_IoT_Device\\Virtual_IoT_Device.csproj",
+      "projectUniqueName": "C:\\Users\\Sudip\\Desktop\\Virtual_IoT_Device\\Virtual_IoT_Device.csproj",
       "projectName": "Virtual_IoT_Device",
-      "projectPath": "C:\\Users\\Dr. S Chakraborty\\Desktop\\Virtual_IoT_Device\\Virtual_IoT_Device.csproj",
-      "packagesPath": "C:\\Users\\Dr. S Chakraborty\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Dr. S Chakraborty\\Desktop\\Virtual_IoT_Device\\obj\\",
+      "projectPath": "C:\\Users\\Sudip\\Desktop\\Virtual_IoT_Device\\Virtual_IoT_Device.csproj",
+      "packagesPath": "C:\\Users\\Sudip\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Sudip\\Desktop\\Virtual_IoT_Device\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Dr. S Chakraborty\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Sudip\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

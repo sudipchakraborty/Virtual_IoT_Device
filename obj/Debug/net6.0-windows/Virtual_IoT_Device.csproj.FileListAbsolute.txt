@@ -45,3 +45,29 @@ C:\Users\Dr. S Chakraborty\Desktop\Virtual_IoT_Device\obj\Debug\net6.0-windows\V
 C:\Users\Dr. S Chakraborty\Desktop\Virtual_IoT_Device\obj\Debug\net6.0-windows\Virtual_IoT_Device.genruntimeconfig.cache
 C:\Users\Dr. S Chakraborty\Desktop\Virtual_IoT_Device\obj\Debug\net6.0-windows\ref\Virtual_IoT_Device.dll
 C:\Users\Dr. S Chakraborty\Desktop\Virtual_IoT_Device\obj\Debug\net6.0-windows\App.baml
+C:\Users\Sudip\Desktop\Virtual_IoT_Device\bin\Debug\net6.0-windows\Virtual_IoT_Device.exe
+C:\Users\Sudip\Desktop\Virtual_IoT_Device\bin\Debug\net6.0-windows\Virtual_IoT_Device.deps.json
+C:\Users\Sudip\Desktop\Virtual_IoT_Device\bin\Debug\net6.0-windows\Virtual_IoT_Device.runtimeconfig.json
+C:\Users\Sudip\Desktop\Virtual_IoT_Device\bin\Debug\net6.0-windows\Virtual_IoT_Device.dll
+C:\Users\Sudip\Desktop\Virtual_IoT_Device\bin\Debug\net6.0-windows\Virtual_IoT_Device.pdb
+C:\Users\Sudip\Desktop\Virtual_IoT_Device\bin\Debug\net6.0-windows\Newtonsoft.Json.dll
+C:\Users\Sudip\Desktop\Virtual_IoT_Device\bin\Debug\net6.0-windows\SuperSocket.ClientEngine.dll
+C:\Users\Sudip\Desktop\Virtual_IoT_Device\bin\Debug\net6.0-windows\WebSocket4Net.dll
+C:\Users\Sudip\Desktop\Virtual_IoT_Device\obj\Debug\net6.0-windows\Virtual_IoT_Device.csproj.AssemblyReference.cache
+C:\Users\Sudip\Desktop\Virtual_IoT_Device\obj\Debug\net6.0-windows\MainWindow.g.cs
+C:\Users\Sudip\Desktop\Virtual_IoT_Device\obj\Debug\net6.0-windows\App.g.cs
+C:\Users\Sudip\Desktop\Virtual_IoT_Device\obj\Debug\net6.0-windows\Virtual_IoT_Device_MarkupCompile.cache
+C:\Users\Sudip\Desktop\Virtual_IoT_Device\obj\Debug\net6.0-windows\Virtual_IoT_Device_MarkupCompile.lref
+C:\Users\Sudip\Desktop\Virtual_IoT_Device\obj\Debug\net6.0-windows\App.baml
+C:\Users\Sudip\Desktop\Virtual_IoT_Device\obj\Debug\net6.0-windows\MainWindow.baml
+C:\Users\Sudip\Desktop\Virtual_IoT_Device\obj\Debug\net6.0-windows\Virtual_IoT_Device.g.resources
+C:\Users\Sudip\Desktop\Virtual_IoT_Device\obj\Debug\net6.0-windows\Virtual_IoT_Device.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Sudip\Desktop\Virtual_IoT_Device\obj\Debug\net6.0-windows\Virtual_IoT_Device.AssemblyInfoInputs.cache
+C:\Users\Sudip\Desktop\Virtual_IoT_Device\obj\Debug\net6.0-windows\Virtual_IoT_Device.AssemblyInfo.cs
+C:\Users\Sudip\Desktop\Virtual_IoT_Device\obj\Debug\net6.0-windows\Virtual_IoT_Device.csproj.CoreCompileInputs.cache
+C:\Users\Sudip\Desktop\Virtual_IoT_Device\obj\Debug\net6.0-windows\Virtual_IoT_Device.csproj.CopyComplete
+C:\Users\Sudip\Desktop\Virtual_IoT_Device\obj\Debug\net6.0-windows\Virtual_IoT_Device.dll
+C:\Users\Sudip\Desktop\Virtual_IoT_Device\obj\Debug\net6.0-windows\refint\Virtual_IoT_Device.dll
+C:\Users\Sudip\Desktop\Virtual_IoT_Device\obj\Debug\net6.0-windows\Virtual_IoT_Device.pdb
+C:\Users\Sudip\Desktop\Virtual_IoT_Device\obj\Debug\net6.0-windows\Virtual_IoT_Device.genruntimeconfig.cache
+C:\Users\Sudip\Desktop\Virtual_IoT_Device\obj\Debug\net6.0-windows\ref\Virtual_IoT_Device.dll
