@@ -23,6 +23,8 @@ namespace Virtual_IoT_Device
     public partial class MainWindow : Window
     {
         IoT_SinricPro iot;
+        System.Windows.Threading.DispatcherTimer timer1;
+
 
         public MainWindow()
         {
@@ -32,9 +34,23 @@ namespace Virtual_IoT_Device
             txt_value_R.Text="255";
             txt_wall_temp.Text="0.0";
             Smart_bulb_update();
-            // iot=new IoT_SinricPro();
+            iot=new IoT_SinricPro();
             update_wall_thermometer(txt_wall_temp.Text);
+
+            timer1 = new System.Windows.Threading.DispatcherTimer();
+            timer1.Tick += timer1_Tick;
+            timer1.Interval = new TimeSpan(0, 0, 0,0,100);
+            timer1.Start();
+
+
         }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+             iot.ProcessIncomingMessages();
+        }
+
+
 
         private void btn_door_open_Click(object sender, EventArgs e)
         {

@@ -27,7 +27,7 @@ namespace Tools
         // The following Package need to be installed using NuGet Package Manager
         // <1> Newtonsoft.Json
         // <2> WebSocket4Net
-        // The package not required now. In the previous module it was required
+        // The below packages not required now. In the previous module it was required
         // Microsoft.Extensions.DependencyInjection
         //Microsoft.Extensions.Configuration.Json
         //Microsoft.Extensions.Configuration.FileExtensions
@@ -51,7 +51,11 @@ namespace Tools
             var headers3 = new List<KeyValuePair<string, string>>();
 
             KeyValuePair<string, string> app_key = new KeyValuePair<string, string>("appkey", "4605c221-5d30-494d-836f-42db372373de");
-            KeyValuePair<string, string> dev_ids = new KeyValuePair<string, string>("deviceids", "6369fcc9333d12dd2ae9b09c;6369fc7eb8a7fefbd63538a5;6369fbc5b8a7fefbd63535fc");
+          //  KeyValuePair<string, string> dev_ids = new KeyValuePair<string, string>("deviceids", "6369fcc9333d12dd2ae9b09c;6369fc7eb8a7fefbd63538a5;6369fbc5b8a7fefbd63535fc");
+
+            KeyValuePair<string, string> dev_ids = new KeyValuePair<string, string>("deviceids", "6369fcc9333d12dd2ae9b09c");
+
+
             KeyValuePair<string, string> env = new KeyValuePair<string, string>("platform", "csharp");
             KeyValuePair<string, string> dev_state = new KeyValuePair<string, string>("restoredevicestates", "true");
 
