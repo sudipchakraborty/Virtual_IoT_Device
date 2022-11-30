@@ -5,6 +5,7 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <UseWindowsForms>True</UseWindowsForms>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,9 +14,11 @@
     <None Remove="Image\Smart_Bulb.jpg" />
     <None Remove="Image\Smart_Bulb.png" />
     <None Remove="Image\Wall_Thermometer.png" />
+    <None Remove="settings.json" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Json.Net" Version="1.0.33" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
     <PackageReference Include="WebSocket4Net" Version="0.15.2" />
   </ItemGroup>
@@ -26,6 +29,7 @@
     <Resource Include="Image\Smart_Bulb.jpg" />
     <Resource Include="Image\Smart_Bulb.png" />
     <Resource Include="Image\Wall_Thermometer.png" />
+    <Resource Include="settings.json" />
   </ItemGroup>
 
 </Project>

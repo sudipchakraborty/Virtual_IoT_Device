@@ -71,3 +71,4 @@ C:\Users\Sudip\Desktop\Virtual_IoT_Device\obj\Debug\net6.0-windows\refint\Virtua
 C:\Users\Sudip\Desktop\Virtual_IoT_Device\obj\Debug\net6.0-windows\Virtual_IoT_Device.pdb
 C:\Users\Sudip\Desktop\Virtual_IoT_Device\obj\Debug\net6.0-windows\Virtual_IoT_Device.genruntimeconfig.cache
 C:\Users\Sudip\Desktop\Virtual_IoT_Device\obj\Debug\net6.0-windows\ref\Virtual_IoT_Device.dll
+C:\Users\Dr. S Chakraborty\Desktop\Virtual_IoT_Device\bin\Debug\net6.0-windows\Json.Net.dll

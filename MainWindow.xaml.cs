@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Virtual_IoT_Device.IoT_Sinric_Pro;
+using IoT_SinricPro;
 
 namespace Virtual_IoT_Device
 {
@@ -21,7 +21,7 @@ namespace Virtual_IoT_Device
     /// </summary>
     public partial class MainWindow : Window
     {
-        IoT_SinricPro iot;
+        SinricPro iot;
         System.Windows.Threading.DispatcherTimer timer1;
 
 
@@ -32,9 +32,18 @@ namespace Virtual_IoT_Device
             txt_value_G.Text="255";
             txt_value_R.Text="255";
             txt_wall_temp.Text="0.0";
-            Smart_bulb_update();
-            iot=new IoT_SinricPro();
-            update_wall_thermometer(txt_wall_temp.Text);
+         //   Smart_bulb_update();
+
+
+            iot=new SinricPro();
+
+
+
+
+
+
+
+          //  update_wall_thermometer(txt_wall_temp.Text);
 
             timer1 = new System.Windows.Threading.DispatcherTimer();
             timer1.Tick += timer1_Tick;
@@ -46,7 +55,12 @@ namespace Virtual_IoT_Device
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-             iot.ProcessIncomingMessages();
+            var commands = new List<KeyValuePair<string, string>>();
+            if (iot.command_available(ref commands)) 
+                {
+                    string s = "";
+                }
+             
         }
 
 

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Sudip\\Desktop\\Virtual_IoT_Device\\Virtual_IoT_Device.csproj": {}
+    "C:\\Users\\Dr. S Chakraborty\\Desktop\\Virtual_IoT_Device\\Virtual_IoT_Device.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Sudip\\Desktop\\Virtual_IoT_Device\\Virtual_IoT_Device.csproj": {
+    "C:\\Users\\Dr. S Chakraborty\\Desktop\\Virtual_IoT_Device\\Virtual_IoT_Device.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Sudip\\Desktop\\Virtual_IoT_Device\\Virtual_IoT_Device.csproj",
+        "projectUniqueName": "C:\\Users\\Dr. S Chakraborty\\Desktop\\Virtual_IoT_Device\\Virtual_IoT_Device.csproj",
         "projectName": "Virtual_IoT_Device",
-        "projectPath": "C:\\Users\\Sudip\\Desktop\\Virtual_IoT_Device\\Virtual_IoT_Device.csproj",
-        "packagesPath": "C:\\Users\\Sudip\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Sudip\\Desktop\\Virtual_IoT_Device\\obj\\",
+        "projectPath": "C:\\Users\\Dr. S Chakraborty\\Desktop\\Virtual_IoT_Device\\Virtual_IoT_Device.csproj",
+        "packagesPath": "C:\\Users\\Dr. S Chakraborty\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Dr. S Chakraborty\\Desktop\\Virtual_IoT_Device\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Sudip\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Dr. S Chakraborty\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -40,6 +40,10 @@
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
           "dependencies": {
+            "Json.Net": {
+              "target": "Package",
+              "version": "[1.0.33, )"
+            },
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.2, )"
@@ -64,7 +68,7 @@
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             },
-            "Microsoft.WindowsDesktop.App.WPF": {
+            "Microsoft.WindowsDesktop.App": {
               "privateAssets": "none"
             }
           },

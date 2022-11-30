@@ -1,0 +1,8 @@
+{
+  "uri": "ws://ws.sinric.pro",
+  "SecretKey": "8f41d53e-0173-48b9-bfc0-fc254e730d42-73c800c7-b08d-4938-b4d1-988585a20aa1",
+  "App_Key": "4605c221-5d30-494d-836f-42db372373de",
+  "DOOR": "6369fcc9333d12dd2ae9b09c",
+  "Smart_LED_Bulb": "6369fc7eb8a7fefbd63538a5",
+  "Wall_Thermometer": "6369fbc5b8a7fefbd63535fc"
+}

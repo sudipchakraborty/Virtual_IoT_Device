@@ -2,6 +2,15 @@
   "version": 3,
   "targets": {
     "net6.0-windows7.0": {
+      "Json.Net/1.0.33": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Json.Net.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Json.Net.dll": {}
+        }
+      },
       "Microsoft.NETCore.Platforms/1.1.0": {
         "type": "package",
         "compile": {
@@ -1070,6 +1079,18 @@
     }
   },
   "libraries": {
+    "Json.Net/1.0.33": {
+      "sha512": "5tE+db6BqhRAvITIVBeRsQorLGshPExfm4FmMRvWWAfs4RxeTbFFj2PIEybwmMW0qR30HKkXDYhq0YkDK2Jtxw==",
+      "type": "package",
+      "path": "json.net/1.0.33",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "json.net.1.0.33.nupkg.sha512",
+        "json.net.nuspec",
+        "lib/netstandard2.0/Json.Net.dll"
+      ]
+    },
     "Microsoft.NETCore.Platforms/1.1.0": {
       "sha512": "kz0PEW2lhqygehI/d6XsPCQzD7ff7gUJaVGPVETX611eadGsA3A877GdSlU0LRVMCTH/+P3o2iDTak+S08V2+A==",
       "type": "package",
@@ -3690,24 +3711,25 @@
   },
   "projectFileDependencyGroups": {
     "net6.0-windows7.0": [
+      "Json.Net >= 1.0.33",
       "Newtonsoft.Json >= 13.0.2",
       "WebSocket4Net >= 0.15.2"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Sudip\\.nuget\\packages\\": {}
+    "C:\\Users\\Dr. S Chakraborty\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Sudip\\Desktop\\Virtual_IoT_Device\\Virtual_IoT_Device.csproj",
+      "projectUniqueName": "C:\\Users\\Dr. S Chakraborty\\Desktop\\Virtual_IoT_Device\\Virtual_IoT_Device.csproj",
       "projectName": "Virtual_IoT_Device",
-      "projectPath": "C:\\Users\\Sudip\\Desktop\\Virtual_IoT_Device\\Virtual_IoT_Device.csproj",
-      "packagesPath": "C:\\Users\\Sudip\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Sudip\\Desktop\\Virtual_IoT_Device\\obj\\",
+      "projectPath": "C:\\Users\\Dr. S Chakraborty\\Desktop\\Virtual_IoT_Device\\Virtual_IoT_Device.csproj",
+      "packagesPath": "C:\\Users\\Dr. S Chakraborty\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Dr. S Chakraborty\\Desktop\\Virtual_IoT_Device\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Sudip\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Dr. S Chakraborty\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3733,6 +3755,10 @@
       "net6.0-windows7.0": {
         "targetAlias": "net6.0-windows",
         "dependencies": {
+          "Json.Net": {
+            "target": "Package",
+            "version": "[1.0.33, )"
+          },
           "Newtonsoft.Json": {
             "target": "Package",
             "version": "[13.0.2, )"
@@ -3757,7 +3783,7 @@
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           },
-          "Microsoft.WindowsDesktop.App.WPF": {
+          "Microsoft.WindowsDesktop.App": {
             "privateAssets": "none"
           }
         },
