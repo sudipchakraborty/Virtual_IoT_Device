@@ -3,7 +3,9 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Net.WebSockets;
+using System.Runtime.Intrinsics.X86;
 using System.Runtime.Serialization;
 using System.Security.Cryptography;
 using System.Text;
@@ -57,6 +59,11 @@ namespace IoT_SinricPro
             comm_channel=new WebSocketClient(uri, headers);          
         }
 
+        /// <summary>
+        /// check command available, if received, read it
+        /// </summary>
+        /// <param name="commands"></param>
+        /// <returns></returns>
         public bool command_available(ref List<KeyValuePair<string, string>> commands)
         {
             if(comm_channel.Packet_Available)
@@ -68,28 +75,16 @@ namespace IoT_SinricPro
                     var message = JsonConvert.DeserializeObject<Packet>(s);
                     if (message.Payload!=null)
                     {
-                        string id = message.Payload.DeviceId;
-
-                        string sss = message.Payload.GetValue.<string>("type");
-                        //   string state = message.Payload.Value.Fields ["state"].ToString();
-                        //   commands.Add(new KeyValuePair<string, string>(id, state));
-
-
+                        string id = message.Payload.DeviceId.ToString();                      
+                        var pld = message.Payload.Value;
+                        var k = pld.Fields.Keys.FirstOrDefault();
+                        var v = pld.Fields.Values.FirstOrDefault();
+                        KeyValuePair<string, string> val = new KeyValuePair<string, string>(id,k.ToString()+","+ v.ToString());
+                        commands.Add(val); 
                     }
-                    
                 }
-                
-
-
-
-
-
-
-
-
-
-                comm_channel.Packet_Available=false;
-                return true;
+                    comm_channel.Packet_Available=false;
+                    return true;
             }
             else
             {
