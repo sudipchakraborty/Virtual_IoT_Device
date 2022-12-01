@@ -77,11 +77,13 @@ namespace Virtual_IoT_Device
                         if (val[1]=="Off")
                         {
                             img_door.Source=new BitmapImage(new Uri("Image/door_close.jpg", UriKind.Relative));
+                            iot.send_ack_to_server(DOOR, "On");
                         }
                         else
                         {
                             img_door.Source=new BitmapImage(new Uri("Image/door_open.jpg", UriKind.Relative));
-                        }
+                            iot.send_ack_to_server(DOOR, "Off");
+                    }
                     break;
                 //////////////////////////
                 case Smart_LED_Bulb:
@@ -91,10 +93,12 @@ namespace Virtual_IoT_Device
                         if (val[1]=="On")
                         {
                             Smart_bulb_update();
+                            iot.send_ack_to_server(Smart_LED_Bulb, "On");
                         }
                         else
                         {
                             smart_bulb_bg.Fill=new SolidColorBrush(Color.FromRgb(125, 125, 125));
+                            iot.send_ack_to_server(Smart_LED_Bulb, "Off");
                         }
                     }
 

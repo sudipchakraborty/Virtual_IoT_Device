@@ -10,6 +10,7 @@ using System.Runtime.Serialization;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
+using System.Windows.Forms;
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -25,24 +26,25 @@ namespace IoT_SinricPro
 {
     public class SinricPro
     {
-        private string SecretKey { get; set; }
+       // private string SecretKey { get; set; }
         private ConcurrentQueue<Packet> IncomingMessages { get; } = new ConcurrentQueue<Packet>();
         private ConcurrentQueue<Packet> OutgoingMessages { get; } = new ConcurrentQueue<Packet>();
         WebSocketClient comm_channel;
         json_handler file;
-        
+        string uri, SecretKey, App_KEY, door, smart_bulb, wall_thermometer, dev_Ids;
+
         public SinricPro()
          {                
             file = new json_handler(@"..\..\..\settings.json");
 
-            string uri = file.Get("uri");
-            string SecretKey= file.Get("SecretKey");
-            string App_KEY = file.Get("App_Key");
+            uri = file.Get("uri");
+            SecretKey= file.Get("SecretKey");
+            App_KEY = file.Get("App_Key");
 
-            string door = file.Get("DOOR");
-            string smart_bulb = file.Get("Smart_LED_Bulb");
-            string wall_thermometer= file.Get("Wall_Thermometer");
-            string dev_Ids=door+';'+smart_bulb+";"+wall_thermometer;    
+            door = file.Get("DOOR");
+            smart_bulb = file.Get("Smart_LED_Bulb");
+            wall_thermometer= file.Get("Wall_Thermometer");
+            dev_Ids=door+';'+smart_bulb+";"+wall_thermometer;    
              
             var headers = new List<KeyValuePair<string, string>>();
 
@@ -91,6 +93,48 @@ namespace IoT_SinricPro
                 return false;
             }
         }
+
+        public void send_ack_to_server(string device_id, string state) 
+        {
+            Packet pkt = Get_Packet(device_id, "SetPowerState", "state", state);
+            var payloadJson = JsonConvert.SerializeObject(pkt.Payload);
+            pkt.RawPayload = new JRaw(payloadJson);
+            pkt.Signature.Hmac = HmacSignature.Signature(payloadJson, SecretKey);
+
+            var json = JsonConvert.SerializeObject(pkt);
+            comm_channel.AddMessageToQueue(json);
+        }
+
+        /// <summary>
+        /// create a function template
+        /// </summary>
+        /// <param name="device_id"></param>
+        /// <param name="state"></param>
+        /// <param name="action"></param>
+        /// <param name="type"></param>
+        /// <param name="val"></param>
+        /// <returns> Return packet object</returns>
+        public Packet Get_Packet(string device_id, string action, string type, object val)
+        {
+            var reply = new Packet();
+
+            reply.TimestampUtc = DateTime.UtcNow;
+            reply.Payload.CreatedAtUtc = DateTime.UtcNow;
+            reply.Payload.Success = true;
+            reply.Payload.SetCause("type", "PHYSICAL_INTERACTION");
+            reply.Payload.ReplyToken = Util_IoT.MessageID();
+            reply.Payload.Type = "response";
+            reply.Payload.Message = "OK";
+
+            reply.Payload.DeviceId = device_id;
+            reply.Payload.Action = action;
+            reply.Payload.SetValue(type, val);
+
+            return reply;
+        }
+
+
+
 
         /// <summary>
         /// Called from the main thread
@@ -254,33 +298,7 @@ namespace IoT_SinricPro
         //    return pkt;
         //}
 
-        /// <summary>
-        /// create a function template
-        /// </summary>
-        /// <param name="device_id"></param>
-        /// <param name="state"></param>
-        /// <param name="action"></param>
-        /// <param name="type"></param>
-        /// <param name="val"></param>
-        /// <returns> Return packet object</returns>
-        //public Packet Get_Packet(string device_id, string action, string type, object val)
-        //{
-        //    var reply = new Packet();
 
-        //    reply.TimestampUtc = DateTime.UtcNow;
-        //    reply.Payload.CreatedAtUtc = DateTime.UtcNow;
-        //    reply.Payload.Success = true;
-        //    reply.Payload.SetCause("type", "PHYSICAL_INTERACTION");
-        //    reply.Payload.ReplyToken = Util_IoT.MessageID();
-        //    reply.Payload.Type = "response";
-        //    reply.Payload.Message = "OK";
-
-        //    reply.Payload.DeviceId = device_id;
-        //    reply.Payload.Action = action;
-        //    reply.Payload.SetValue(type, val);
-
-        //    return reply;
-        //}
 
         /// <summary>
         /// Continous Update to IoT server 
