@@ -12,6 +12,8 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 
+using Json.Net;
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SuperSocket.ClientEngine;
@@ -94,6 +96,28 @@ namespace IoT_SinricPro
             }
         }
 
+        public void send_ack_to_server(string device_id, string param, string value)
+        {
+            Packet pkt = Get_Packet(device_id, "SetPowerState", param, value);
+            var payloadJson = JsonConvert.SerializeObject(pkt.Payload);
+            pkt.RawPayload = new JRaw(payloadJson);
+            pkt.Signature.Hmac = HmacSignature.Signature(payloadJson, SecretKey);
+
+            var json = JsonConvert.SerializeObject(pkt);
+            comm_channel.AddMessageToQueue(json);
+        }
+
+        public object Get_Json_Colour(string b, string g, string r)
+        {
+            color c = new color();
+            c.b=Convert.ToByte(b);
+            c.g=Convert.ToByte(g);
+            c.r=Convert.ToByte(r);
+
+            var jColour = JsonConvert.SerializeObject(c);
+            return jColour;
+        }
+
         public void send_ack_to_server(string device_id, string state) 
         {
             Packet pkt = Get_Packet(device_id, "SetPowerState", "state", state);
@@ -104,6 +128,70 @@ namespace IoT_SinricPro
             var json = JsonConvert.SerializeObject(pkt);
             comm_channel.AddMessageToQueue(json);
         }
+       
+        public void send_to_server(string device_id, string action, string param, object val)
+        {
+            Packet pkt = Get_Packet(device_id, action, param, val);
+            pkt.Payload.SetCause("type", "PERIODIC_POLL");
+            pkt.Payload.Type = "event";
+           
+            var payloadJson = JsonConvert.SerializeObject(pkt.Payload);
+            pkt.RawPayload = new JRaw(payloadJson);
+            pkt.Signature.Hmac = HmacSignature.Signature(payloadJson, SecretKey);
+
+            var json = JsonConvert.SerializeObject(pkt);
+            comm_channel.AddMessageToQueue(json);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /// <summary>
+        /// Continous Update to IoT server 
+        /// Example:-Periodic_Update("6369fbc5b8a7fefbd63535fc" ,"currentTemperature" , "temperature", 23);
+        /// </summary>
+        /// <param name="device_id"></param>
+        /// <param name="action"></param>
+        /// <param name="param">parameter to Update</param>
+        /// <param name="val">parameter value</param>
+        //public void Periodic_Update(string device_id, string action, string param, object val)
+        //{
+        //    var reply = new Packet();
+
+        //    reply.TimestampUtc = DateTime.UtcNow;
+        //    reply.Payload.CreatedAtUtc = DateTime.UtcNow;
+        //    reply.Payload.Success = true;
+        //    reply.Payload.SetCause("type", "PERIODIC_POLL");
+        //    reply.Payload.ReplyToken = Util_IoT.MessageID();
+        //    reply.Payload.Type = "event";
+        //    reply.Payload.Message = "OK";
+
+        //    reply.Payload.DeviceId = device_id;
+        //    reply.Payload.Action = action;
+        //    reply.Payload.SetValue(param, val);
+
+        //    send_OK(reply);
+        //}
+
+
+
+
+
+
 
         /// <summary>
         /// create a function template
@@ -347,47 +435,47 @@ namespace IoT_SinricPro
            // send_OK(reply);
         }
 
-        /// <summary>
-        /// The data send to the remote server
-        /// </summary>
-        /// <param name="reply"></param>
-        /// <returns>if send success, return ok, else return false </returns>
-        //public bool send_OK(Packet reply)
+        ///// <summary>
+        ///// The data send to the remote server
+        ///// </summary>
+        ///// <param name="reply"></param>
+        ///// <returns>if send success, return ok, else return false </returns>
+        ////public bool send_OK(Packet reply)
+        ////{
+        ////    var payloadJson = JsonConvert.SerializeObject(reply.Payload);
+        ////    reply.RawPayload = new JRaw(payloadJson);
+
+        ////    // compute the signature using our secret key so that the service can verify authenticity
+        ////    reply.Signature.Hmac = HmacSignature.Signature(payloadJson, SecretKey);
+
+        ////    try
+        ////    {
+        ////        // serialize the message to json
+        ////        var json = JsonConvert.SerializeObject(reply);
+        ////        WebSocket.Send(json);
+        ////        return true;
+        ////    }
+        ////    catch (Exception ex)
+        ////    {
+        ////        return false;
+        ////    }
+        ////}
+
+        ///// <summary>
+        ///// Enqueue message thread safe
+        ///// </summary>
+        ///// <param name="message"></param>
+        //public void AddMessageToQueue(Packet message)
         //{
-        //    var payloadJson = JsonConvert.SerializeObject(reply.Payload);
-        //    reply.RawPayload = new JRaw(payloadJson);
+        //    var payloadJson = JsonConvert.SerializeObject(message.Payload);
+        //    message.RawPayload = new JRaw(payloadJson);
 
         //    // compute the signature using our secret key so that the service can verify authenticity
-        //    reply.Signature.Hmac = HmacSignature.Signature(payloadJson, SecretKey);
+        //    message.Signature.Hmac = HmacSignature.Signature(payloadJson, SecretKey);
 
-        //    try
-        //    {
-        //        // serialize the message to json
-        //        var json = JsonConvert.SerializeObject(reply);
-        //        WebSocket.Send(json);
-        //        return true;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return false;
-        //    }
+        //    OutgoingMessages.Enqueue(message);
+        //    Debug.Print("Queued websocket message for sending");
         //}
-
-        /// <summary>
-        /// Enqueue message thread safe
-        /// </summary>
-        /// <param name="message"></param>
-        public void AddMessageToQueue(Packet message)
-        {
-            var payloadJson = JsonConvert.SerializeObject(message.Payload);
-            message.RawPayload = new JRaw(payloadJson);
-
-            // compute the signature using our secret key so that the service can verify authenticity
-            message.Signature.Hmac = HmacSignature.Signature(payloadJson, SecretKey);
-
-            OutgoingMessages.Enqueue(message);
-            Debug.Print("Queued websocket message for sending");
-        }
 
      
 
@@ -396,12 +484,22 @@ namespace IoT_SinricPro
 
 
 
+    public class color
+    {
+        [JsonProperty("b")]
+        public byte b { get; set; }
+
+        [JsonProperty("g")]
+        public byte g { get; set; }
+
+        [JsonProperty("r")]
+        public byte r { get; set; }
+    }
 
 
 
 
-
-    public class Packet
+        public class Packet
     {
         [JsonProperty("timestamp")]
         public uint Timestamp { get; set; }

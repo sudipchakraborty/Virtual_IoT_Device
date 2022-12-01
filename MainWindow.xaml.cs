@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO.Packaging;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -14,6 +15,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml;
+
 using IoT_SinricPro;
 
 using Newtonsoft.Json.Linq;
@@ -38,7 +41,18 @@ namespace Virtual_IoT_Device
  
         public MainWindow()
         {
-            InitializeComponent();           
+            InitializeComponent();
+
+            List<string> color_temp_val = new List<string>();
+            color_temp_val.Add("Warm White");
+            color_temp_val.Add("Incandesent, Soft White");
+            color_temp_val.Add("White");
+            color_temp_val.Add("Daylight White");
+            color_temp_val.Add("Cool White");
+            cbo_colour_temp.Items.Clear();
+            cbo_colour_temp.ItemsSource= color_temp_val;
+            cbo_colour_temp.SelectedIndex=0;
+
             txt_value_B.Text="255";
             txt_value_G.Text="255";
             txt_value_R.Text="255";
@@ -107,8 +121,30 @@ namespace Virtual_IoT_Device
                         txt_value_B.Text= Regex.Replace(val[1], "[^0-9]", "");
                         txt_value_G.Text = Regex.Replace(val[2], "[^0-9]", "");
                         txt_value_R.Text = Regex.Replace(val[3], "[^0-9]", "");                         
-                        Smart_bulb_update();               
+                        Smart_bulb_update();
+                        var json_colour = iot.Get_Json_Colour(txt_value_B.Text, txt_value_G.Text, txt_value_R.Text);
+                        iot.send_ack_to_server(Smart_LED_Bulb, "setColor" , json_colour.ToString());
                     }
+
+                    if (val[0]=="brightness")
+                    {                      
+                        Smart_bulb_update();
+                        txt_brightness.Text=val[1];
+                        iot.send_ack_to_server(Smart_LED_Bulb, "setBrightness", val[1]);
+                    }
+
+                    if (val[0]=="colorTemperature")
+                    {
+                        if (val[1]=="2200") cbo_colour_temp.SelectedIndex=0; // Warm White 
+                        if (val[1]=="2700") cbo_colour_temp.SelectedIndex=1; // Incandesent, Soft White
+                        if (val[1]=="4000") cbo_colour_temp.SelectedIndex=2; // White
+                        if (val[1]=="5500") cbo_colour_temp.SelectedIndex=3; //Daylight White
+                        if (val[1]=="7000") cbo_colour_temp.SelectedIndex=4; //Cool White
+
+                        iot.send_ack_to_server(Smart_LED_Bulb, "setColorTemperature", val[1]);
+                    }
+
+
                     break;
                 ////////////////////////////
                 case Wall_Thermometer:
@@ -117,11 +153,13 @@ namespace Virtual_IoT_Device
                     {
                         if (val[1]=="On")
                         {
-                             
+                            iot.send_ack_to_server(Wall_Thermometer,"On");
+                            txt_wall_temp.Background=new SolidColorBrush(Colors.White);
                         }
                         else
                         {
-                             
+                            iot.send_ack_to_server(Wall_Thermometer, "Off");
+                            txt_wall_temp.Background=new SolidColorBrush(Colors.Black);
                         }
                     }
                     break;
@@ -179,7 +217,8 @@ namespace Virtual_IoT_Device
         {
             if (e.Key==Key.Enter)
             {
-                update_wall_thermometer(txt_wall_temp.Text);    
+                update_wall_thermometer(txt_wall_temp.Text);
+                iot.send_to_server(Wall_Thermometer, "currentTemperature", "temperature", txt_wall_temp.Text);
             }         
         }
 

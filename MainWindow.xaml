@@ -250,6 +250,42 @@
                 Grid.Column="21" Grid.ColumnSpan="5"   
                 KeyDown="txt_value_B_KeyDown"
         />
+        <!--_____<Smart bulb Colour Temperature>_____________________________________________________________________________-->
+        <Label  
+                Content="Colour Temperature"       
+                Grid.Row="40" Grid.Column="28"
+                Grid.ColumnSpan="9" Grid.RowSpan="4" 
+                FontSize="10" FontWeight="Bold"
+                HorizontalContentAlignment="Left" 
+                VerticalAlignment="Top"  
+                Foreground="White" Margin="0,6,0,0"
+        />
+        <ComboBox x:Name="cbo_colour_temp"                 
+                Grid.Row="42" Grid.Column="27"
+                Grid.ColumnSpan="8" Grid.RowSpan="4" 
+                FontSize="10" FontWeight="Bold"
+                HorizontalContentAlignment="Left" 
+                VerticalAlignment="Top"  
+                Foreground="Black" Margin="0,6,0,0"
+        />
+        <!--_____<Smart bulb brightness>_____________________________________________________________________________-->
+        <Label  
+                Content="Brightness"       
+                Grid.Row="44" Grid.Column="28"
+                Grid.ColumnSpan="7" Grid.RowSpan="4" 
+                FontSize="14" FontWeight="Bold"
+                HorizontalContentAlignment="Left" 
+                VerticalAlignment="Top"  
+                Foreground="White" Margin="0,6,0,0"
+        />
+
+        <TextBox x:Name="txt_brightness"  Text=""
+                FontFamily="Calibri" FontWeight="Normal" FontSize="20"
+                Background="White" Foreground="Black"      
+                Grid.Row="47" Grid.RowSpan="2" 
+                Grid.Column="27" Grid.ColumnSpan="7"   
+                KeyDown="txt_value_B_KeyDown"
+        />
         <!--_____<Wall Temperature>_____________________________________________________________________________-->
         <Label  x:Name="lbl_wall_temp" 
                 Content="Wall Thermometer"       
