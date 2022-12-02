@@ -107,14 +107,28 @@ namespace IoT_SinricPro
             comm_channel.AddMessageToQueue(json);
         }
 
-        public object Get_Json_Colour(string b, string g, string r)
+        public void send_ack_to_server(string device_id,string action, string param, string value)
+        {
+            Packet pkt = Get_Packet(device_id, action, param, value);
+            var payloadJson = JsonConvert.SerializeObject(pkt.Payload);
+            pkt.RawPayload = new JRaw(payloadJson);
+            pkt.Signature.Hmac = HmacSignature.Signature(payloadJson, SecretKey);
+
+            var json = JsonConvert.SerializeObject(pkt);
+            comm_channel.AddMessageToQueue(json);
+        }
+
+
+
+        public string Get_Json_Colour(string b, string g, string r)
         {
             color c = new color();
             c.b=Convert.ToByte(b);
             c.g=Convert.ToByte(g);
             c.r=Convert.ToByte(r);
 
-            var jColour = JsonConvert.SerializeObject(c);
+            var jColour = JsonConvert.SerializeObject(c).ToString();
+          //  var s = JsonConvert.DeserializeObject(jColour);
             return jColour;
         }
 

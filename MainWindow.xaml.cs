@@ -57,7 +57,7 @@ namespace Virtual_IoT_Device
             txt_value_G.Text="255";
             txt_value_R.Text="255";
             txt_wall_temp.Text="0.0";
-            Smart_bulb_update();
+     //       Smart_bulb_update();
             iot=new SinricPro();
             update_wall_thermometer(txt_wall_temp.Text);
 
@@ -123,6 +123,7 @@ namespace Virtual_IoT_Device
                         txt_value_R.Text = Regex.Replace(val[3], "[^0-9]", "");                         
                         Smart_bulb_update();
                         var json_colour = iot.Get_Json_Colour(txt_value_B.Text, txt_value_G.Text, txt_value_R.Text);
+                        
                         iot.send_ack_to_server(Smart_LED_Bulb, "setColor" , json_colour.ToString());
                     }
 
@@ -228,6 +229,11 @@ namespace Virtual_IoT_Device
             byte g = Convert.ToByte(txt_value_G.Text);
             byte b = Convert.ToByte(txt_value_B.Text);
             smart_bulb_bg.Fill=new SolidColorBrush(Color.FromRgb(r, g, b));
+   
+            var json_colour = iot.Get_Json_Colour(txt_value_B.Text, txt_value_G.Text, txt_value_R.Text);
+            string cleanJson = Regex.Unescape(json_colour);
+            iot.send_ack_to_server(Smart_LED_Bulb, "setColor","color", cleanJson);
+
         }
 
         private void update_wall_thermometer(String temperature)
