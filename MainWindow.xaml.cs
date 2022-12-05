@@ -91,12 +91,12 @@ namespace Virtual_IoT_Device
                         if (val[1]=="Off")
                         {
                             img_door.Source=new BitmapImage(new Uri("Image/door_close.jpg", UriKind.Relative));
-                            iot.send_ack_to_server(DOOR, "On");
+                            iot.send_ack_to_server(DOOR, "Off");
                         }
                         else
                         {
                             img_door.Source=new BitmapImage(new Uri("Image/door_open.jpg", UriKind.Relative));
-                            iot.send_ack_to_server(DOOR, "Off");
+                            iot.send_ack_to_server(DOOR, "On");
                     }
                     break;
                 //////////////////////////
@@ -232,7 +232,9 @@ namespace Virtual_IoT_Device
    
             var json_colour = iot.Get_Json_Colour(txt_value_B.Text, txt_value_G.Text, txt_value_R.Text);
             string cleanJson = Regex.Unescape(json_colour);
-            iot.send_ack_to_server(Smart_LED_Bulb, "setColor","color", cleanJson);
+  //          iot.send_ack_to_server(Smart_LED_Bulb, "setColor","color", cleanJson);
+
+            iot.Smart_Bulb_Colour(Smart_LED_Bulb, "setColor", "color", cleanJson);
 
         }
 

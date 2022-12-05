@@ -431,22 +431,52 @@ namespace IoT_SinricPro
 
         public void Smart_Bulb_Colour(string device_id, string action, string type, object val)
         {
-            Packet reply = new Packet();
+            Packet pkt = Get_Packet(device_id, action, type, val);
+            pkt.Payload.SetCause("type", "PHYSICAL_INTERACTION");
 
-            reply.TimestampUtc = DateTime.UtcNow;
-            reply.Payload.CreatedAtUtc = DateTime.UtcNow;
-            reply.Payload.Success = true;
-            reply.Payload.SetCause("type", "PHYSICAL_INTERACTION");
-            reply.Payload.ReplyToken = Util_IoT.MessageID();
-            reply.Payload.Type = "response";
-            reply.Payload.Message = "OK";
 
-            string s = reply.Payload.Value.ToString();
-            reply.Payload.DeviceId = device_id;
-            //      reply.Payload.Action = action;
-            //      reply.Payload.SetValue(type, val);
 
-           // send_OK(reply);
+            var payloadJson = JsonConvert.SerializeObject(pkt.Payload);
+            pkt.RawPayload = new JRaw(payloadJson);
+            pkt.Signature.Hmac = HmacSignature.Signature(payloadJson, SecretKey);
+
+            var json = JsonConvert.SerializeObject(pkt);
+            comm_channel.AddMessageToQueue(json);
+
+
+
+
+
+
+            //Packet reply = new Packet();
+
+            //reply.TimestampUtc = DateTime.UtcNow;
+            //reply.Payload.CreatedAtUtc = DateTime.UtcNow;
+            //reply.Payload.Success = true;
+            //reply.Payload.SetCause("type", "PHYSICAL_INTERACTION");
+            //reply.Payload.ReplyToken = Util_IoT.MessageID();
+            //reply.Payload.Type = "response";
+            //reply.Payload.Message = "OK";
+
+            //string s = reply.Payload.Value.ToString();
+            //reply.Payload.DeviceId = device_id;
+            //reply.Payload.Action = action;
+            //reply.Payload.SetValue(type, val);
+
+
+
+
+            ////Packet pkt = Get_Packet(device_id, action, param, val);
+            ////pkt.Payload.SetCause("type", "PERIODIC_POLL");
+            ////pkt.Payload.Type = "event";
+
+            //var json = JsonConvert.SerializeObject(reply);
+            //reply.RawPayload = new JRaw(json);
+            //reply.Signature.Hmac = HmacSignature.Signature(json, SecretKey);
+
+            //  json = JsonConvert.SerializeObject(reply);
+            //comm_channel.AddMessageToQueue(json);
+            // send_OK(reply);
         }
 
         ///// <summary>
