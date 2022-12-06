@@ -146,7 +146,7 @@ namespace IoT_SinricPro
         public void send_to_server(string device_id, string action, string param, object val)
         {
             Packet pkt = Get_Packet(device_id, action, param, val);
-            pkt.Payload.SetCause("type", "PERIODIC_POLL");
+       //     pkt.Payload.SetCause("type", "PERIODIC_POLL");
             pkt.Payload.Type = "event";
            
             var payloadJson = JsonConvert.SerializeObject(pkt.Payload);
@@ -223,7 +223,7 @@ namespace IoT_SinricPro
             reply.TimestampUtc = DateTime.UtcNow;
             reply.Payload.CreatedAtUtc = DateTime.UtcNow;
             reply.Payload.Success = true;
-            reply.Payload.SetCause("type", "PHYSICAL_INTERACTION");
+      //      reply.Payload.SetCause("type", "PHYSICAL_INTERACTION");
             reply.Payload.ReplyToken = Util_IoT.MessageID();
             reply.Payload.Type = "response";
             reply.Payload.Message = "OK";
@@ -431,10 +431,34 @@ namespace IoT_SinricPro
 
         public void Smart_Bulb_Colour(string device_id, string action, string type, object val)
         {
+      
+            Packet reply = new Packet();
+
+            reply.TimestampUtc = DateTime.UtcNow;
+            reply.Payload.CreatedAtUtc = DateTime.UtcNow;
+            reply.Payload.Success = true;
+            reply.Payload.SetCause("type", "PHYSICAL_INTERACTION");
+            reply.Payload.ReplyToken = Util_IoT.MessageID();
+            reply.Payload.Type = "response";
+            reply.Payload.Message = "OK";
+
+            string s = reply.Payload.Value.ToString();
+            reply.Payload.DeviceId = device_id;
+            //      reply.Payload.Action = action;
+            //      reply.Payload.SetValue(type, val);
+
+           // send_OK(reply);
+        }
+
+
+        public void Smart_Bulb_Colour2(string device_id, string action, string type, object val)
+        {
+
+
             Packet pkt = Get_Packet(device_id, action, type, val);
-            pkt.Payload.SetCause("type", "PHYSICAL_INTERACTION");
-
-
+     //       pkt.Payload.SetCause("type", "PHYSICAL_INTERACTION");
+            pkt.Payload.Type="response";
+            pkt.Payload.ClientId="csharp";
 
             var payloadJson = JsonConvert.SerializeObject(pkt.Payload);
             pkt.RawPayload = new JRaw(payloadJson);
@@ -478,6 +502,31 @@ namespace IoT_SinricPro
             //comm_channel.AddMessageToQueue(json);
             // send_OK(reply);
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         ///// <summary>
         ///// The data send to the remote server
@@ -612,11 +661,6 @@ namespace IoT_SinricPro
             return true;
         }
     }
-
-
-
-
-
 
     public class Payload
     {
@@ -758,7 +802,6 @@ namespace IoT_SinricPro
         public string Hmac { get; set; }
     }
  
-
     public class SinricCause
     {
         public const string PhysicalInteraction = "PHYSICAL_INTERACTION";
@@ -769,8 +812,6 @@ namespace IoT_SinricPro
         public IDictionary<string, JToken> Fields { get; set; } = new Dictionary<string, JToken>();
     }
 
-
-
     public class SinricHeader
     {
         [JsonProperty("payloadVersion")]
@@ -779,9 +820,6 @@ namespace IoT_SinricPro
         [JsonProperty("signatureVersion")]
         public int SignatureVersion { get; set; } = 1;
     }
-
-
-
 
     public class SinricValue
     {

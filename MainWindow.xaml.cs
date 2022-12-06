@@ -91,12 +91,12 @@ namespace Virtual_IoT_Device
                         if (val[1]=="Off")
                         {
                             img_door.Source=new BitmapImage(new Uri("Image/door_close.jpg", UriKind.Relative));
-                            iot.send_ack_to_server(DOOR, "Off");
+                            iot.send_ack_to_server(DOOR, "On");
                         }
                         else
                         {
                             img_door.Source=new BitmapImage(new Uri("Image/door_open.jpg", UriKind.Relative));
-                            iot.send_ack_to_server(DOOR, "On");
+                            iot.send_ack_to_server(DOOR, "Off");
                     }
                     break;
                 //////////////////////////
@@ -194,7 +194,7 @@ namespace Virtual_IoT_Device
         {
             if(e.Key==Key.Enter)
             {
-                Smart_bulb_update();
+              //  Smart_bulb_update();
             }
         }
 
@@ -202,7 +202,16 @@ namespace Virtual_IoT_Device
         {
             if (e.Key==Key.Enter)
             {
-                Smart_bulb_update();
+                byte r = Convert.ToByte(txt_value_R.Text);
+                byte g = Convert.ToByte(txt_value_G.Text);
+                byte b = Convert.ToByte(txt_value_B.Text);
+                smart_bulb_bg.Fill=new SolidColorBrush(Color.FromRgb(r, g, b));
+
+                var json_colour = iot.Get_Json_Colour(txt_value_B.Text, txt_value_G.Text, txt_value_R.Text);
+                string cleanJson = Regex.Unescape(json_colour);
+                //          iot.send_ack_to_server(Smart_LED_Bulb, "setColor","color", cleanJson);
+
+                iot.Smart_Bulb_Colour2(Smart_LED_Bulb, "setColor", "color", cleanJson);
             }        
         }
 
@@ -210,7 +219,7 @@ namespace Virtual_IoT_Device
         {
             if (e.Key==Key.Enter)
             {
-                Smart_bulb_update();
+               // Smart_bulb_update();
             }         
         }
 
@@ -232,9 +241,7 @@ namespace Virtual_IoT_Device
    
             var json_colour = iot.Get_Json_Colour(txt_value_B.Text, txt_value_G.Text, txt_value_R.Text);
             string cleanJson = Regex.Unescape(json_colour);
-  //          iot.send_ack_to_server(Smart_LED_Bulb, "setColor","color", cleanJson);
-
-            iot.Smart_Bulb_Colour(Smart_LED_Bulb, "setColor", "color", cleanJson);
+            iot.send_ack_to_server(Smart_LED_Bulb, "setColor","color", cleanJson);
 
         }
 

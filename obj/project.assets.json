@@ -3722,11 +3722,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Dr. S Chakraborty\\Desktop\\Virtual_IoT_Device\\Virtual_IoT_Device.csproj",
+      "projectUniqueName": "C:\\Users\\Dr. S Chakraborty\\Desktop\\Final_Test\\Virtual_IoT_Device.csproj",
       "projectName": "Virtual_IoT_Device",
-      "projectPath": "C:\\Users\\Dr. S Chakraborty\\Desktop\\Virtual_IoT_Device\\Virtual_IoT_Device.csproj",
+      "projectPath": "C:\\Users\\Dr. S Chakraborty\\Desktop\\Final_Test\\Virtual_IoT_Device.csproj",
       "packagesPath": "C:\\Users\\Dr. S Chakraborty\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Dr. S Chakraborty\\Desktop\\Virtual_IoT_Device\\obj\\",
+      "outputPath": "C:\\Users\\Dr. S Chakraborty\\Desktop\\Final_Test\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Dr. S Chakraborty\\AppData\\Roaming\\NuGet\\NuGet.Config",
